@@ -1,2 +1,2 @@
 # gocharge
-a out of box toolkit for golang
+an out of box toolkit for golang
