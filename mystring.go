@@ -1,4 +1,4 @@
-package types
+package gocharge
 
 import (
 	"strings"
@@ -38,7 +38,7 @@ func (s *MyString) IsNullOrEmpty(trimSpace ...bool) bool {
 	return false
 }
 
-// IsNullOrWhiteSpace returns a bool to make sure if it is null and whitespace
+// IsNullOrWhiteSpace returns a bool to make sure if it is null or whitespace
 func (s *MyString) IsNullOrWhiteSpace() bool {
 	var _s = s.ToString()
 	if len(*s) == 0 {

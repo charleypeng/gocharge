@@ -1,13 +1,12 @@
-package logging
+package gocharge
 
 import (
 	"fmt"
-	"gocharge/interfaces"
-	"gocharge/logging/LoggerType"
+	"gocharge/LoggerType"
 )
 
 type IStdLogger interface {
-	gocharge.ILogger
+	ILogger
 	LetMeGo() string
 }
 

@@ -1,7 +1,6 @@
-package types
+package gocharge
 
 import (
-	"gocharge/interfaces"
 	"strings"
 )
 
@@ -17,11 +16,11 @@ func SumNumbers[K comparable, V Number](m map[K]V) V {
 	return s
 }
 
-func Log[T gocharge.ILogger](lover T) {
+func Log[T ILogger](lover T) {
 	lover.LogInfo("wjkk")
 }
 
-func Run(save *string){
+func Run(save *string) {
 	var sl = *save
-	strings.Trim(sl,"")
+	strings.Trim(sl, "")
 }

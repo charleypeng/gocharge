@@ -1,4 +1,4 @@
-package list
+package gocharge
 
 type List[T any] struct {
 	slice []T
