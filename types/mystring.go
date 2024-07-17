@@ -27,9 +27,11 @@ func (s *MyString) IsNullOrEmpty(trimSpace ...bool) bool {
 		panic("only 1 param should be set")
 	}
 
-	if trimSpace[0] {
-		if len(strings.TrimSpace(_s)) == 0 {
-			return true
+	if len(trimSpace) == 1 {
+		if trimSpace[0] {
+			if len(strings.TrimSpace(_s)) == 0 {
+				return true
+			}
 		}
 	}
 
