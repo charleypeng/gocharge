@@ -1,3 +1,6 @@
+// package dtos is a const lib for gocharge dtos
+//
+// For information, please see readme
 package dtos
 
 type LoginDto struct {

@@ -6,7 +6,7 @@ import (
 )
 
 func Version() {
-	fmt.Printf("v0.0.2\n")
+	fmt.Printf("v0.0.8\n")
 	few := MyString("test string")
 	few.IsNullOrWhiteSpace()
 }
