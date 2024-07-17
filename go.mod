@@ -1,5 +1,4 @@
 module gocharge
 
-go 1.21.1
+go 1.22.5
 
-require github.com/devfeel/mapper v0.7.13

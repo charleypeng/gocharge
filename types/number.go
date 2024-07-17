@@ -2,6 +2,7 @@ package types
 
 import (
 	"gocharge/interfaces"
+	"strings"
 )
 
 type Number interface {
@@ -18,4 +19,9 @@ func SumNumbers[K comparable, V Number](m map[K]V) V {
 
 func Log[T gocharge.ILogger](lover T) {
 	lover.LogInfo("wjkk")
+}
+
+func Run(save *string){
+	var sl = *save
+	strings.Trim(sl,"")
 }
