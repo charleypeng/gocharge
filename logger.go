@@ -2,8 +2,6 @@ package gocharge
 
 import (
 	"fmt"
-
-	"github.com/charleypeng/gocharge/LoggerType"
 )
 
 type IStdLogger interface {
@@ -36,6 +34,5 @@ func (l Logger) LogCritical(v any) {
 }
 
 func (l Logger) LogInfo(v any) {
-	l.loggerType = LoggerType.Standard
 	fmt.Println(v)
 }

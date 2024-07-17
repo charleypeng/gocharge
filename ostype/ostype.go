@@ -1,7 +1,7 @@
 // package LoggerType is a const lib for gocharge logging
 //
 // For information, please see readme
-package LoggerType
+package ostype
 
 const (
 	Standard = iota
