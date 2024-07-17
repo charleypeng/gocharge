@@ -1,6 +1,6 @@
 package models
 
-import "gocharge/dtos"
+import "github.com/charleypeng/gocharge/dtos"
 
 type Login struct {
 	UserName string

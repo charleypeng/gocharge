@@ -2,7 +2,8 @@ package gocharge
 
 import (
 	"fmt"
-	"gocharge/LoggerType"
+
+	"github.com/charleypeng/gocharge/LoggerType"
 )
 
 type IStdLogger interface {
