@@ -4,7 +4,7 @@ an out of box toolkit for golang
 ## usage
 
 ```bash
-go get github.com/charleypeng/gocharge.git
+go get github.com/charleypeng/gocharge
 ```
 
 ```go
