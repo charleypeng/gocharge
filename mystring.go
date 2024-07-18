@@ -13,8 +13,16 @@ func (s *MyString) ToString() string {
 
 // IsNullOrEmpty returns a bool to make sure if it is null or empty
 func (s *MyString) IsNullOrEmpty(trimSpace ...bool) bool {
-	var _s = s.ToString()
+	_s := s.ToString()
+	return IsStringNull(&_s, trimSpace...)
+}
 
+// IsNullOrWhiteSpace returns a bool to make sure if it is null or whitespace
+func (s *MyString) IsNullOrWhiteSpace() bool {
+	return s.IsNullOrEmpty(true)
+}
+
+func IsStringNull(s *string, trimSpace ...bool) bool {
 	if s == nil {
 		return true
 	}
@@ -29,7 +37,7 @@ func (s *MyString) IsNullOrEmpty(trimSpace ...bool) bool {
 
 	if len(trimSpace) == 1 {
 		if trimSpace[0] {
-			if len(strings.TrimSpace(_s)) == 0 {
+			if len(strings.TrimSpace(*s)) == 0 {
 				return true
 			}
 		}
@@ -38,15 +46,6 @@ func (s *MyString) IsNullOrEmpty(trimSpace ...bool) bool {
 	return false
 }
 
-// IsNullOrWhiteSpace returns a bool to make sure if it is null or whitespace
-func (s *MyString) IsNullOrWhiteSpace() bool {
-	var _s = s.ToString()
-	if len(*s) == 0 {
-		return true
-	}
-
-	if len(strings.TrimSpace(_s)) == 0 {
-		return true
-	}
-	return false
+func IsStringNullOrWhiteSpace(s *string) bool {
+	return IsStringNull(s, true)
 }
