@@ -1,5 +1,7 @@
 package gocharge
 
+import "sync"
+
 // List is a good way to use like csharp list
 type List[T any] struct {
 	//a slice of items
@@ -42,15 +44,28 @@ func (lst *List[T]) Sum() any {
 
 // a linq function which returns a predicated list
 func (lst *List[T]) Where(predicate func(T) bool) List[T] {
+	// Estimate the capacity for the result slice
+	estimatedCapacity := len(lst.Items) / 2
+	result := make([]T, 0, estimatedCapacity)
 
-	var result = *NewList[T]()
+	var mu sync.Mutex
+	var wg sync.WaitGroup
 
+	// Process the slice in parallel using goroutines
 	for _, data := range lst.Items {
-		if predicate(data) {
-			result.Add(data)
-		}
+		wg.Add(1)
+		go func(data T) {
+			defer wg.Done()
+			if predicate(data) {
+				mu.Lock()
+				result = append(result, data)
+				mu.Unlock()
+			}
+		}(data)
 	}
-	return result
+
+	wg.Wait()
+	return *NewList(result)
 }
 
 // get the array list
@@ -61,12 +76,26 @@ func (lst *List[T]) ToArray() []T {
 // a linq function which returns a predicated list
 func WhereT[T any](lst *[]T, predicate func(T) bool) []T {
 
-	var result = make([]T, 0)
+	// Estimate the capacity for the result slice
+	estimatedCapacity := len(*lst) / 2
+	result := make([]T, 0, estimatedCapacity)
 
+	var mu sync.Mutex
+	var wg sync.WaitGroup
+
+	// Process the slice in parallel using goroutines
 	for _, data := range *lst {
-		if predicate(data) {
-			result = append(result, data)
-		}
+		wg.Add(1)
+		go func(data T) {
+			defer wg.Done()
+			if predicate(data) {
+				mu.Lock()
+				result = append(result, data)
+				mu.Unlock()
+			}
+		}(data)
 	}
+
+	wg.Wait()
 	return result
 }
