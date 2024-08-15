@@ -25,7 +25,7 @@ func TestVersion(t *testing.T) {
 	lst := gocharge.NewList(dto)
 
 	result := lst.Where(func(u dtos.LoginDto) bool {
-		return strings.Contains(u.UserName, "da")
+		return strings.Contains(u.UserName, "ma") || strings.Contains(u.UserName, "dajj")
 	})
 	fmt.Println(result)
 	//myfmt.(&l)

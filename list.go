@@ -10,7 +10,9 @@ func NewList[T any](data ...[]T) *List[T] {
 	var gclist = List[T]{}
 	if len(data) == 1 {
 		gclist.items = data[0]
+		return &gclist
 	}
+
 	gclist.items = make([]T, 0)
 	return &gclist
 }
