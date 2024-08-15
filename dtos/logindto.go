@@ -4,10 +4,10 @@
 package dtos
 
 type LoginDto struct {
-	UserName *string `json:"firstName"`
-	Age      *string `json:"age,omitempty"`
+	UserName string  `json:"firstName"`
+	Age      int     `json:"age,omitempty"`
 	Makers   []Maker `json:"makers,omitempty"`
-	Lover    *string `json:"lover,omitempty"`
+	Lover    string  `json:"lover,omitempty"`
 }
 
 type Maker struct {
