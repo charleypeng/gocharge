@@ -43,7 +43,7 @@ func (lst *List[T]) Sum() any {
 }
 
 // a linq function which returns a predicated list
-func (lst *List[T]) Where(predicate func(T) bool) List[T] {
+func (lst *List[T]) Where(predicate func(T) bool) *List[T] {
 	// Estimate the capacity for the result slice
 	estimatedCapacity := len(lst.Items) / 2
 	result := make([]T, 0, estimatedCapacity)
@@ -65,16 +65,16 @@ func (lst *List[T]) Where(predicate func(T) bool) List[T] {
 	}
 
 	wg.Wait()
-	return *NewList(result)
+	return NewList(result)
 }
 
 // get the array list
-func (lst *List[T]) ToArray() []T {
-	return lst.Items
+func (lst *List[T]) ToArray() *[]T {
+	return &lst.Items
 }
 
 // a linq function which returns a predicated list
-func WhereT[T any](lst *[]T, predicate func(T) bool) []T {
+func WhereT[T any](lst *[]T, predicate func(T) bool) *[]T {
 
 	// Estimate the capacity for the result slice
 	estimatedCapacity := len(*lst) / 2
@@ -97,5 +97,5 @@ func WhereT[T any](lst *[]T, predicate func(T) bool) []T {
 	}
 
 	wg.Wait()
-	return result
+	return &result
 }
