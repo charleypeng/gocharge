@@ -2,29 +2,30 @@ package gocharge
 
 // List is a good way to use like csharp list
 type List[T any] struct {
-	items []T
+	//a slice of items
+	Items []T
 }
 
 // create a new list struct
 func NewList[T any](data ...[]T) *List[T] {
 	var gclist = List[T]{}
 	if len(data) == 1 {
-		gclist.items = data[0]
+		gclist.Items = data[0]
 		return &gclist
 	}
 
-	gclist.items = make([]T, 0)
+	gclist.Items = make([]T, 0)
 	return &gclist
 }
 
 // add new items
 func (lst *List[T]) AddItems(data []T) {
-	lst.items = append(lst.items, data...)
+	lst.Items = append(lst.Items, data...)
 }
 
 // add new item
 func (lst *List[T]) AddItem(data T) {
-	lst.items = append(lst.items, data)
+	lst.Items = append(lst.Items, data)
 }
 
 // returns bool if the given element contains the given data
@@ -44,7 +45,7 @@ func (lst *List[T]) Where(predicate func(T) bool) List[T] {
 
 	var result = *NewList[T]()
 
-	for _, data := range lst.items {
+	for _, data := range lst.Items {
 		if predicate(data) {
 			result.AddItem(data)
 		}
@@ -54,7 +55,7 @@ func (lst *List[T]) Where(predicate func(T) bool) List[T] {
 
 // get the array list
 func (lst *List[T]) ToArray() []T {
-	return lst.items
+	return lst.Items
 }
 
 // a linq function which returns a predicated list
