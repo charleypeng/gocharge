@@ -19,12 +19,12 @@ func NewList[T any](data ...[]T) *List[T] {
 }
 
 // add new items
-func (lst *List[T]) AddItems(data []T) {
+func (lst *List[T]) AddRange(data []T) {
 	lst.Items = append(lst.Items, data...)
 }
 
 // add new item
-func (lst *List[T]) AddItem(data T) {
+func (lst *List[T]) Add(data T) {
 	lst.Items = append(lst.Items, data)
 }
 
@@ -47,7 +47,7 @@ func (lst *List[T]) Where(predicate func(T) bool) List[T] {
 
 	for _, data := range lst.Items {
 		if predicate(data) {
-			result.AddItem(data)
+			result.Add(data)
 		}
 	}
 	return result
