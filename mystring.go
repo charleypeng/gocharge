@@ -9,6 +9,8 @@ import (
 // MyString is a  type for csharp like string
 type MyString string
 
+// ToString converts the MyString to a standard Go string.
+// It returns the underlying string value of the MyString type.
 func (s *MyString) ToString() string {
 	return string(*s)
 }
