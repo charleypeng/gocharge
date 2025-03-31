@@ -1,6 +1,9 @@
 package gocharge
 
-import "sync"
+import (
+	"fmt"
+	"sync"
+)
 
 // List is a good way to use like csharp list
 type List[T any] struct {
@@ -30,16 +33,93 @@ func (lst *List[T]) Add(data T) {
 	lst.Items = append(lst.Items, data)
 }
 
-// returns bool if the given element contains the given data
-func (lst *List[T]) Contains(data T) (bool, error) {
-	//todo
-	return true, nil
+// Count returns the number of elements in the list
+func (lst *List[T]) Count() int {
+	return len(lst.Items)
 }
 
-// sum all the data if it is comparable
-func (lst *List[T]) Sum() any {
-	//todo
+// Clear removes all elements from the list
+func (lst *List[T]) Clear() {
+	lst.Items = make([]T, 0)
+}
+
+// Contains checks if an element is in the list
+func (lst *List[T]) Contains(data T) bool {
+	for _, item := range lst.Items {
+		if any(item) == any(data) {
+			return true
+		}
+	}
+	return false
+}
+
+// IndexOf returns the index of the first occurrence of the specified element
+func (lst *List[T]) IndexOf(data T) int {
+	for i, item := range lst.Items {
+		if any(item) == any(data) {
+			return i
+		}
+	}
+	return -1
+}
+
+// Insert adds an element at the specified index
+func (lst *List[T]) Insert(index int, data T) error {
+	if index < 0 || index > len(lst.Items) {
+		return fmt.Errorf("index out of range")
+	}
+
+	lst.Items = append(lst.Items[:index], append([]T{data}, lst.Items[index:]...)...)
 	return nil
+}
+
+// Remove removes the first occurrence of the specified element
+func (lst *List[T]) Remove(data T) bool {
+	index := lst.IndexOf(data)
+	if index == -1 {
+		return false
+	}
+
+	lst.Items = append(lst.Items[:index], lst.Items[index+1:]...)
+	return true
+}
+
+// RemoveAt removes the element at the specified index
+func (lst *List[T]) RemoveAt(index int) error {
+	if index < 0 || index >= len(lst.Items) {
+		return fmt.Errorf("index out of range")
+	}
+
+	lst.Items = append(lst.Items[:index], lst.Items[index+1:]...)
+	return nil
+}
+
+// Find returns the first element that matches the predicate
+func (lst *List[T]) Find(predicate func(T) bool) (T, bool) {
+	for _, item := range lst.Items {
+		if predicate(item) {
+			return item, true
+		}
+	}
+	var zero T
+	return zero, false
+}
+
+// FindIndex returns the index of the first element that matches the predicate
+func (lst *List[T]) FindIndex(predicate func(T) bool) int {
+	for i, item := range lst.Items {
+		if predicate(item) {
+			return i
+		}
+	}
+	return -1
+}
+
+// ForEach performs the specified action on each element
+func (lst *List[T]) ForEach(action func(T)) {
+	for _, item := range lst.Items {
+		action(item)
+	}
 }
 
 // a linq function which returns a predicated list

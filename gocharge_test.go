@@ -41,4 +41,6 @@ func TestVersion(t *testing.T) {
 	fmt.Println(result)
 	//fmt.Println(result2)
 	//myfmt.(&l)
+	lsd := gocharge.MyString("hello world")
+	fmt.Println("test for mystring", lsd.CompareTo("world"))
 }
